@@ -1,0 +1,65 @@
+@use "sass:list";
+@use "sass:math";
+@use "sass:map";
+@use "breakpoints";
+
+// The base value for rem calculations
+$rem-base: 16px;
+
+// Strip the unit from a number
+@function strip-unit($number) {
+    @if type-of($number) == "number" and not unitless($number) {
+        @return math.div($number, ($number * 0 + 1));
+    }
+
+    @return $number;
+}
+
+// Convert a pixel value to rem
+@function convert-to-rem($value, $base-value: $rem-base, $limit: true) {
+    @if abs($value) < 8 and $limit {
+        @return $value * 1px;
+    }
+
+    $value: math.div(strip-unit($value), strip-unit($base-value)) * 1rem;
+
+    @return $value;
+}
+
+// Fluid typography
+$default-min-bp: 375;
+$default-max-bp: 1440;
+
+@function round($number, $decimals: 0) {
+    $n: 1;
+    @if $decimals > 0 {
+        @for $i from 1 through $decimals {
+            $n: $n * 10;
+        }
+    }
+    @return math.div(math.round($number * $n), $n);
+}
+
+@function rem($px) {
+    $rem: math.div($px, 16) * 1rem;
+    @return $rem;
+}
+
+@function fluid(
+    $min-size,
+    $max-size,
+    $min-breakpoint: $default-min-bp,
+    $max-breakpoint: $default-max-bp,
+    $unit: vw
+) {
+    $slope: math.div($max-size - $min-size, $max-breakpoint - $min-breakpoint);
+    $slope-to-unit: round($slope * 100, 2);
+    $intercept-rem: round(rem($min-size - $slope * $min-breakpoint), 2);
+    $min-size-rem: round(rem($min-size), 2);
+    $max-size-rem: round(rem($max-size), 2);
+    @return clamp(
+        #{$min-size-rem},
+        #{$slope-to-unit}#{$unit} + #{$intercept-rem},
+        #{$max-size-rem}
+    );
+}

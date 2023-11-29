@@ -1,0 +1,14 @@
+$color-text: #dfd4c5;
+$color-background: #362f2d;
+$color-accent-red: #bd3722;
+$color-accent-blue: #4e70ca;
+$color-accent-blue-alt: #5679d7;
+
+html,
+body {
+    height: 100%;
+    color: $color-text;
+}
+html {
+    background-color: $color-background;
+}
