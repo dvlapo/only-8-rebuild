@@ -28,6 +28,7 @@ background.style.height = `${window.innerHeight * sections.length}px`;
 let totalNoOfBoxes;
 function createBoxes() {
     const boxes = document.querySelector(".boxes");
+    boxes.innerHTML = "";
 
     const noOfBoxesOnXAxis = window.innerWidth > 700 ? 20 : 10;
     const noOfBoxesOnYAxis = window.innerWidth > 700 ? 10 : 20;
