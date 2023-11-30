@@ -46,7 +46,10 @@ function createBoxes() {
 }
 
 createBoxes();
-window.addEventListener("resize", createBoxes);
+window.addEventListener("resize", () => {
+    createBoxes();
+    background.style.height = `${window.innerHeight * sections.length}px`;
+});
 
 function lightUp(arg) {
     const boxes = [...document.querySelectorAll(".box")];
