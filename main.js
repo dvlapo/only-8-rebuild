@@ -34,7 +34,7 @@ function createBoxes() {
             : window.innerHeight / window.innerWidth
     );
 
-    const noOfBoxesOnXAxis = window.innerWidth < 700 ? 10 : 20;
+    const noOfBoxesOnXAxis = 20;
     const boxWidth = window.innerWidth / noOfBoxesOnXAxis;
 
     const noOfBoxesOnYAxis =
@@ -151,6 +151,24 @@ function lightUp(arg) {
                 box.classList.add("shrink");
             }
         });
+    } else if (arg === "ninth") {
+        const pos = [
+            1, 2, 3, 4, 5, 6, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 36,
+            37, 38, 39, 40, 41, 42, 43, 44, 57, 58, 59, 60, 61, 62, 63, 78, 79,
+            80, 81, 82, 99, 100, 101, 102, 119, 120, 121, 122, 123, 138, 139,
+            140, 141, 142, 143, 144, 157, 158, 159, 160, 161, 162, 163, 164,
+            165, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 195,
+            196, 197, 198, 199, 200,
+        ];
+        boxes.forEach((box, idx) => {
+            if (pos.includes(idx + 1)) {
+                box.classList.remove("shrink");
+                box.classList.add("grow");
+            } else {
+                box.classList.remove("grow");
+                box.classList.add("shrink");
+            }
+        });
     }
 }
 
@@ -175,6 +193,9 @@ function watchIntersection() {
         .getBoundingClientRect().top;
     const eighthSection = document
         .querySelector("#eighth p")
+        .getBoundingClientRect().top;
+    const ninthSection = document
+        .querySelector("#ninth p")
         .getBoundingClientRect().top;
     const tenthSection = document
         .querySelector("#tenth p")
@@ -221,9 +242,15 @@ function watchIntersection() {
     ) {
         lightUp("eighth");
     } else if (
+        (ninthSection / window.innerHeight) * 100 > 0 &&
+        (ninthSection / window.innerHeight) * 100 <= 100
+    ) {
+        lightUp("ninth");
+    } else if (
         (tenthSection / window.innerHeight) * 100 > 0 &&
         (tenthSection / window.innerHeight) * 100 <= 100
     ) {
+        lightUp();
         const cta = document.querySelector(".cta");
         cta.classList.add("show");
     } else {
