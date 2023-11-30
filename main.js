@@ -28,19 +28,11 @@ background.style.height = `${window.innerHeight * sections.length}px`;
 let totalNoOfBoxes;
 function createBoxes() {
     const boxes = document.querySelector(".boxes");
-    const windowAspectRatio = Math.floor(
-        window.innerWidth > window.innerHeight
-            ? window.innerWidth / window.innerHeight
-            : window.innerHeight / window.innerWidth
-    );
 
-    const noOfBoxesOnXAxis = 20;
+    const noOfBoxesOnXAxis = window.innerWidth > 700 ? 20 : 10;
+    const noOfBoxesOnYAxis = window.innerWidth > 700 ? 10 : 20;
     const boxWidth = window.innerWidth / noOfBoxesOnXAxis;
 
-    const noOfBoxesOnYAxis =
-        window.innerWidth > window.innerHeight
-            ? 20 / windowAspectRatio
-            : 20 * windowAspectRatio;
     totalNoOfBoxes = noOfBoxesOnXAxis * noOfBoxesOnYAxis;
 
     for (let i = 0; i < totalNoOfBoxes; i++) {
@@ -115,9 +107,13 @@ function lightUp(arg) {
             }
         });
     } else if (arg === "seventh") {
-        const pos = [
-            8, 18, 32, 44, 63, 75, 117, 123, 135, 148, 151, 172, 181, 190,
-        ];
+        const pos =
+            window.innerWidth > 700
+                ? [
+                      8, 18, 32, 44, 63, 75, 117, 123, 135, 148, 151, 172, 181,
+                      190,
+                  ]
+                : [8, 32, 44, 63, 75, 117, 123, 148, 151, 172, 181, 190];
         boxes.forEach((box, idx) => {
             if (pos.includes(idx + 1)) {
                 box.classList.remove("shrink");
@@ -128,9 +124,13 @@ function lightUp(arg) {
             }
         });
     } else if (arg === "eighth") {
-        const pos = [
-            83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98,
-        ];
+        const pos =
+            window.innerWidth > 700
+                ? [
+                      83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96,
+                      97, 98,
+                  ]
+                : [92, 93, 94, 95, 96, 97, 98, 99];
         boxes.forEach((box, idx) => {
             if (pos.includes(idx + 1)) {
                 box.classList.remove("shrink");
@@ -141,7 +141,7 @@ function lightUp(arg) {
             }
         });
     } else if (arg === "eighth-short") {
-        const pos = [89, 90, 91];
+        const pos = window.innerWidth > 700 ? [89, 90, 91] : [95, 96];
         boxes.forEach((box, idx) => {
             if (pos.includes(idx + 1)) {
                 box.classList.remove("shrink");
@@ -152,14 +152,28 @@ function lightUp(arg) {
             }
         });
     } else if (arg === "ninth") {
-        const pos = [
-            1, 2, 3, 4, 5, 6, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 36,
-            37, 38, 39, 40, 41, 42, 43, 44, 57, 58, 59, 60, 61, 62, 63, 78, 79,
-            80, 81, 82, 99, 100, 101, 102, 119, 120, 121, 122, 123, 138, 139,
-            140, 141, 142, 143, 144, 157, 158, 159, 160, 161, 162, 163, 164,
-            165, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 195,
-            196, 197, 198, 199, 200,
-        ];
+        const pos =
+            window.innerWidth > 700
+                ? [
+                      1, 2, 3, 4, 5, 6, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+                      25, 36, 37, 38, 39, 40, 41, 42, 43, 44, 57, 58, 59, 60,
+                      61, 62, 63, 78, 79, 80, 81, 82, 99, 100, 101, 102, 119,
+                      120, 121, 122, 123, 138, 139, 140, 141, 142, 143, 144,
+                      157, 158, 159, 160, 161, 162, 163, 164, 165, 176, 177,
+                      178, 179, 180, 181, 182, 183, 184, 185, 186, 195, 196,
+                      197, 198, 199, 200,
+                  ]
+                : [
+                      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
+                      18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
+                      32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 48, 49,
+                      50, 51, 52, 59, 60, 61, 70, 131, 140, 141, 142, 149, 150,
+                      151, 152, 153, 158, 159, 160, 161, 162, 163, 164, 165,
+                      166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176,
+                      177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187,
+                      188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198,
+                      199, 200,
+                  ];
         boxes.forEach((box, idx) => {
             if (pos.includes(idx + 1)) {
                 box.classList.remove("shrink");
